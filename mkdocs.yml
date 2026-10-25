@@ -1,0 +1,78 @@
+site_name: VFA Documentation
+site_description: >-
+  Official documentation for VFA (Visual & Functional Web Auditor) — an autonomous
+  black-box web QA agent exposed as an MCP server over stdio.
+site_author: VFA
+site_url: https://vfa-docs.github.io/
+repo_name: vfa-mcp
+repo_url: https://github.com/vfa/vfa-mcp
+
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - toc.follow
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+markdown_extensions:
+  - admonition
+  - tables
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - toc:
+      permalink: true
+      toc_depth: 3
+
+nav:
+  - Overview: index.md
+  - Quickstart & License: quickstart.md
+  - Environment Variables: configuration.md
+  - MCP Tools: tools.md
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/vfa/vfa-mcp
+      name: VFA MCP Server
+
+copyright: Copyright &copy; VFA — Visual & Functional Web Auditor
