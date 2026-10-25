@@ -1,0 +1,14 @@
+# MkDocs build output
+site/
+.cache/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# OS / Editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
