@@ -71,9 +71,9 @@ place. For standalone runs, export the same keys in your shell instead.
       "VFA_LICENSE_KEY": "TU_LICENCIA_CREEM",
       "VFA_LLM_PROVIDER": "deepseek",
       "VFA_LLM_MODEL": "deepseek-chat",
-      "VFA_LLM_API_KEY": "YOUR_DEEPSEEK_API_KEY",
+      "DEEPSEEK_API_KEY": "YOUR_DEEPSEEK_API_KEY",
       "VFA_VISION_PROVIDER": "deepseek",
-      "VFA_VISION_MODEL": "deepseek-vl2",
+      "VFA_VISION_MODEL": "deepseek-flash",
       "HEADLESS": "true",
       "LITELLM_LOG": "ERROR"
     }
@@ -90,7 +90,7 @@ place. For standalone runs, export the same keys in your shell instead.
       "VFA_LICENSE_KEY": "TU_LICENCIA_CREEM",
       "VFA_LLM_PROVIDER": "anthropic",
       "VFA_LLM_MODEL": "claude-3-5-sonnet-latest",
-      "VFA_LLM_API_KEY": "YOUR_ANTHROPIC_API_KEY",
+      "ANTHROPIC_API_KEY": "YOUR_ANTHROPIC_API_KEY",
       "HEADLESS": "true",
       "LITELLM_LOG": "ERROR"
     }
@@ -99,14 +99,14 @@ place. For standalone runs, export the same keys in your shell instead.
     The reference configuration — best grounding quality on complex flows. One multimodal
     model covers both reasoning and vision, so no `VFA_VISION_*` override is needed.
 
-=== "Google Gemini 2.0 Flash (Multimodal)"
+=== "Google Gemini 3.8 Flash (Multimodal)"
 
     ```json
     "env": {
       "VFA_LICENSE_KEY": "TU_LICENCIA_CREEM",
       "VFA_LLM_PROVIDER": "gemini",
-      "VFA_LLM_MODEL": "gemini-2.0-flash-exp",
-      "VFA_LLM_API_KEY": "YOUR_GOOGLE_AI_STUDIO_KEY",
+      "VFA_LLM_MODEL": "gemini-3.8-flash",
+      "GEMINI_API_KEY": "YOUR_GOOGLE_AI_STUDIO_KEY",
       "HEADLESS": "true",
       "LITELLM_LOG": "ERROR"
     }
@@ -122,7 +122,7 @@ place. For standalone runs, export the same keys in your shell instead.
       "VFA_LICENSE_KEY": "TU_LICENCIA_CREEM",
       "VFA_LLM_PROVIDER": "openrouter",
       "VFA_LLM_MODEL": "anthropic/claude-3.5-sonnet",
-      "VFA_LLM_API_KEY": "YOUR_OPENROUTER_API_KEY",
+      "OPENROUTER_API_KEY": "YOUR_OPENROUTER_API_KEY",
       "VFA_LLM_BASE_URL": "https://openrouter.ai/api/v1",
       "VFA_VISION_PROVIDER": "openrouter",
       "VFA_VISION_MODEL": "google/gemini-2.0-flash-exp:free",
@@ -150,7 +150,7 @@ place. For standalone runs, export the same keys in your shell instead.
     }
     ```
 
-    Fully offline reasoning — `VFA_LLM_API_KEY` is not required for a local daemon. The first
+    Fully offline reasoning — `YOUR_*_API_KEY` is not required for a local daemon. The first
     run still performs one Creem activation call; afterwards the cached license lets VFA run
     without internet access. Keep `VFA_ALLOW_LOCAL_HOST` at `false` unless you are auditing
     local apps.
@@ -162,8 +162,10 @@ place. For standalone runs, export the same keys in your shell instead.
       "VFA_LICENSE_KEY": "TU_LICENCIA_CREEM",
       "VFA_LLM_PROVIDER": "openai",
       "VFA_LLM_MODEL": "openai/deepseek-v4-pro",
-      "VFA_LLM_API_KEY": "YOUR_GATEWAY_API_KEY",
-      "OPENAI_API_BASE": "https://gateway.internal.example/v1",
+      "VFA_VISION_PROVIDER": "openai",
+      "VFA_VISION_MODEL": "openai/deepseek-flash",
+      "DEEPSEEK_API_KEY": "YOUR_GATEWAY_API_KEY",
+      "OPENAI_API_BASE": "https://api.deepseek.com",
       "HEADLESS": "true",
       "LITELLM_LOG": "ERROR"
     }
