@@ -422,6 +422,45 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#complete-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complete reference
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Complete reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#credentials-reasoning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Credentials &amp; reasoning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#browser-sandbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Browser &amp; sandbox
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#validation-checklist" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -534,6 +573,45 @@
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#complete-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complete reference
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Complete reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#credentials-reasoning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Credentials &amp; reasoning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#browser-sandbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Browser &amp; sandbox
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -707,72 +785,309 @@ confirmation. Use a multimodal model.</p>
 shares a network with production infrastructure.</p>
 </div>
 <h2 id="drop-in-presets">Drop-in presets<a class="headerlink" href="#drop-in-presets" title="Permanent link">&para;</a></h2>
-<p>Copy the block for your provider into the <code>env</code> object of your MCP client configuration, or
-export it in your shell.</p>
+<p>Each preset below is a <strong>drop-in replacement for the <code>"env"</code> object</strong> of your MCP client
+configuration: copy the block, drop the previous <code>"env"</code> object, and paste the new one in its
+place. For standalone runs, export the same keys in your shell instead.</p>
 <div class="admonition note">
 <p class="admonition-title">Placeholder credentials</p>
-<p>Every key below is a documentation placeholder of the form <code>YOUR_*_API_KEY</code> — none of
-them is a real credential or a valid key format. Substitute your own values and keep them
-out of version control.</p>
+<p><code>TU_LICENCIA_CREEM</code> and every <code>YOUR_*_API_KEY</code> value are documentation placeholders — none
+of them is a real credential or a valid key format. Substitute your own values and keep
+them out of version control.</p>
 </div>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">DeepSeek</label><label for="__tabbed_1_2">Claude 3.5 Sonnet</label><label for="__tabbed_1_3">Gemini 2.0 Flash</label><label for="__tabbed_1_4">OpenRouter</label><label for="__tabbed_1_5">Local Ollama</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">DeepSeek (Reasoning + Fast Vision)</label><label for="__tabbed_1_2">Anthropic Claude 3.5 Sonnet</label><label for="__tabbed_1_3">Google Gemini 3.8 Flash (Multimodal)</label><label for="__tabbed_1_4">OpenRouter (Universal Gateway)</label><label for="__tabbed_1_5">Ollama (100% Local / Offline)</label><label for="__tabbed_1_6">OpenAI-compatible gateway</label><label for="__tabbed_1_7">Anthropic-compatible gateway</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LLM_PROVIDER</span><span class="o">=</span><span class="s2">"deepseek"</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LLM_MODEL</span><span class="o">=</span><span class="s2">"deepseek-chat"</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LLM_API_KEY</span><span class="o">=</span><span class="s2">"YOUR_DEEPSEEK_API_KEY"</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LLM_BASE_URL</span><span class="o">=</span><span class="s2">"https://api.deepseek.com/v1"</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># DeepSeek is text-only: pair it with a vision model for grounding</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_VISION_PROVIDER</span><span class="o">=</span><span class="s2">"gemini"</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_VISION_MODEL</span><span class="o">=</span><span class="s2">"gemini-2.0-flash-exp"</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_VISION_API_KEY</span><span class="o">=</span><span class="s2">"YOUR_GOOGLE_AI_STUDIO_KEY"</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">"VFA_LICENSE_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TU_LICENCIA_CREEM"</span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">"VFA_LLM_PROVIDER"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deepseek"</span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">"VFA_LLM_MODEL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deepseek-chat"</span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="nt">"DEEPSEEK_API_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YOUR_DEEPSEEK_API_KEY"</span><span class="p">,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="nt">"VFA_VISION_PROVIDER"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deepseek"</span><span class="p">,</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="nt">"VFA_VISION_MODEL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deepseek-flash"</span><span class="p">,</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">  </span><span class="nt">"HEADLESS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">  </span><span class="nt">"LITELLM_LOG"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ERROR"</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>The lowest-cost configuration. Because <code>deepseek-chat</code> has no vision support, a vision
-override is strongly recommended.</p>
+<p>The lowest-cost configuration. <code>deepseek-chat</code> handles the ReAct loop while the vision
+model consumes screenshots; if your account exposes no multimodal DeepSeek model, point
+<code>VFA_VISION_*</code> at Gemini 2.0 Flash or OpenRouter instead.</p>
 </div>
 <div class="tabbed-block">
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LLM_PROVIDER</span><span class="o">=</span><span class="s2">"anthropic"</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LLM_MODEL</span><span class="o">=</span><span class="s2">"claude-3-5-sonnet-latest"</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LLM_API_KEY</span><span class="o">=</span><span class="s2">"YOUR_ANTHROPIC_API_KEY"</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># No vision override needed: the core model is multimodal</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">"VFA_LICENSE_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TU_LICENCIA_CREEM"</span><span class="p">,</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">"VFA_LLM_PROVIDER"</span><span class="p">:</span><span class="w"> </span><span class="s2">"anthropic"</span><span class="p">,</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">"VFA_LLM_MODEL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"claude-3-5-sonnet-latest"</span><span class="p">,</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">"ANTHROPIC_API_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YOUR_ANTHROPIC_API_KEY"</span><span class="p">,</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="nt">"HEADLESS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="nt">"LITELLM_LOG"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ERROR"</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>The reference configuration — best grounding quality for complex flows. One model handles
-both reasoning and vision, so no override is necessary.</p>
+<p>The reference configuration — best grounding quality on complex flows. One multimodal
+model covers both reasoning and vision, so no <code>VFA_VISION_*</code> override is needed.</p>
 </div>
 <div class="tabbed-block">
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LLM_PROVIDER</span><span class="o">=</span><span class="s2">"gemini"</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LLM_MODEL</span><span class="o">=</span><span class="s2">"gemini-2.0-flash-exp"</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LLM_API_KEY</span><span class="o">=</span><span class="s2">"YOUR_GOOGLE_AI_STUDIO_KEY"</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">"VFA_LICENSE_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TU_LICENCIA_CREEM"</span><span class="p">,</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">"VFA_LLM_PROVIDER"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gemini"</span><span class="p">,</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">"VFA_LLM_MODEL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gemini-3.8-flash"</span><span class="p">,</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">"GEMINI_API_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YOUR_GOOGLE_AI_STUDIO_KEY"</span><span class="p">,</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nt">"HEADLESS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="nt">"LITELLM_LOG"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ERROR"</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>Fast, cheap and multimodal — a balanced default for high-volume audit runs.</p>
+<p>Fast, cheap and natively multimodal — a balanced default for high-volume audit runs where
+latency matters more than deep reasoning.</p>
 </div>
 <div class="tabbed-block">
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LLM_PROVIDER</span><span class="o">=</span><span class="s2">"openrouter"</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LLM_MODEL</span><span class="o">=</span><span class="s2">"anthropic/claude-3.5-sonnet"</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LLM_API_KEY</span><span class="o">=</span><span class="s2">"YOUR_OPENROUTER_API_KEY"</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LLM_BASE_URL</span><span class="o">=</span><span class="s2">"https://openrouter.ai/api/v1"</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># Route screenshots to a cheaper multimodal model while keeping Sonnet for reasoning</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_VISION_PROVIDER</span><span class="o">=</span><span class="s2">"openrouter"</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_VISION_MODEL</span><span class="o">=</span><span class="s2">"google/gemini-2.0-flash-exp:free"</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">"VFA_LICENSE_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TU_LICENCIA_CREEM"</span><span class="p">,</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">"VFA_LLM_PROVIDER"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openrouter"</span><span class="p">,</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">"VFA_LLM_MODEL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"anthropic/claude-3.5-sonnet"</span><span class="p">,</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="nt">"OPENROUTER_API_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YOUR_OPENROUTER_API_KEY"</span><span class="p">,</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="nt">"VFA_LLM_BASE_URL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://openrouter.ai/api/v1"</span><span class="p">,</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span><span class="nt">"VFA_VISION_PROVIDER"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openrouter"</span><span class="p">,</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span><span class="nt">"VFA_VISION_MODEL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"google/gemini-2.0-flash-exp:free"</span><span class="p">,</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">  </span><span class="nt">"HEADLESS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">  </span><span class="nt">"LITELLM_LOG"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ERROR"</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>Any model available on OpenRouter can be selected by changing <code>VFA_LLM_MODEL</code> — the
-provider prefix in the model string follows OpenRouter's own namespace.</p>
+<p>One credential unlocks every hosted model. Any model on OpenRouter can be selected by
+changing <code>VFA_LLM_MODEL</code> with OpenRouter's own <code>vendor/model</code> namespace.</p>
 </div>
 <div class="tabbed-block">
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LLM_PROVIDER</span><span class="o">=</span><span class="s2">"ollama"</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LLM_MODEL</span><span class="o">=</span><span class="s2">"llama3.1:70b"</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LLM_BASE_URL</span><span class="o">=</span><span class="s2">"http://localhost:11434"</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># VFA_LLM_API_KEY is not required for a local daemon</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_VISION_PROVIDER</span><span class="o">=</span><span class="s2">"ollama"</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_VISION_MODEL</span><span class="o">=</span><span class="s2">"llava:latest"</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c1"># Chrome does not need to reach a private range, but the model does:</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1"># keep the anti-SSRF guard on unless you are auditing local apps</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_ALLOW_LOCAL_HOST</span><span class="o">=</span><span class="s2">"false"</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">"VFA_LICENSE_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TU_LICENCIA_CREEM"</span><span class="p">,</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">"VFA_LLM_PROVIDER"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ollama"</span><span class="p">,</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">"VFA_LLM_MODEL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"llama3.1:70b"</span><span class="p">,</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="nt">"OLLAMA_API_BASE"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:11434"</span><span class="p">,</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="nt">"VFA_VISION_PROVIDER"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ollama"</span><span class="p">,</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="nt">"VFA_VISION_MODEL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"llava:latest"</span><span class="p">,</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">  </span><span class="nt">"VFA_ALLOW_LOCAL_HOST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">  </span><span class="nt">"HEADLESS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">  </span><span class="nt">"LITELLM_LOG"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ERROR"</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>Fully offline reasoning. <code>VFA_LICENSE_KEY</code> still requires one activation call to Creem;
-after the license is cached, subsequent runs work without internet access.</p>
+<p>Fully offline reasoning — <code>YOUR_*_API_KEY</code> is not required for a local daemon. The first
+run still performs one Creem activation call; afterwards the cached license lets VFA run
+without internet access. Keep <code>VFA_ALLOW_LOCAL_HOST</code> at <code>false</code> unless you are auditing
+local apps.</p>
+</div>
+<div class="tabbed-block">
+<div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">"VFA_LICENSE_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TU_LICENCIA_CREEM"</span><span class="p">,</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">"VFA_LLM_PROVIDER"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openai"</span><span class="p">,</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">"VFA_LLM_MODEL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openai/deepseek-v4-pro"</span><span class="p">,</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nt">"VFA_VISION_PROVIDER"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openai"</span><span class="p">,</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span><span class="nt">"VFA_VISION_MODEL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openai/deepseek-flash"</span><span class="p">,</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span><span class="nt">"DEEPSEEK_API_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YOUR_GATEWAY_API_KEY"</span><span class="p">,</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">  </span><span class="nt">"OPENAI_API_BASE"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.deepseek.com"</span><span class="p">,</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">  </span><span class="nt">"HEADLESS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">  </span><span class="nt">"LITELLM_LOG"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ERROR"</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Use this for vLLM, LiteLLM Proxy, LM Studio, Together or any endpoint that speaks the
+OpenAI Chat Completions API. Keep the <code>openai/</code> prefix on the model name and point
+<code>OPENAI_API_BASE</code> (or <code>VFA_LLM_BASE_URL</code>) at the gateway root.</p>
+</div>
+<div class="tabbed-block">
+<div class="language-json highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">"VFA_LICENSE_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TU_LICENCIA_CREEM"</span><span class="p">,</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">"VFA_LLM_PROVIDER"</span><span class="p">:</span><span class="w"> </span><span class="s2">"anthropic"</span><span class="p">,</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="nt">"VFA_LLM_MODEL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"claude-3-5-sonnet"</span><span class="p">,</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span><span class="nt">"VFA_LLM_API_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YOUR_GATEWAY_API_KEY"</span><span class="p">,</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">  </span><span class="nt">"ANTHROPIC_BASE_URL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://anthropic-proxy.internal.example"</span><span class="p">,</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">  </span><span class="nt">"HEADLESS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">  </span><span class="nt">"LITELLM_LOG"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ERROR"</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>For Anthropic-compatible proxies or regional endpoints. <code>ANTHROPIC_BASE_URL</code> redirects the
+Messages API traffic; <code>VFA_LLM_BASE_URL</code> takes precedence when both are present.</p>
 </div>
 </div>
+</div>
+<h2 id="complete-reference">Complete reference<a class="headerlink" href="#complete-reference" title="Permanent link">&para;</a></h2>
+<p>Both tables below cover every variable VFA reads. Values in the <strong>Default</strong> column are what
+VFA uses when the variable is absent from the client's <code>env</code> block.</p>
+<h3 id="credentials-reasoning">Credentials &amp; reasoning<a class="headerlink" href="#credentials-reasoning" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Default</th>
+<th>Required when</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>VFA_LICENSE_KEY</code></td>
+<td><em>(empty)</em></td>
+<td><strong>Always</strong></td>
+<td>Commercial license validation from Creem</td>
+</tr>
+<tr>
+<td><code>VFA_LLM_PROVIDER</code></td>
+<td><code>openai</code></td>
+<td>Using non-OpenAI</td>
+<td>Protocol/routing (<code>openai</code>, <code>anthropic</code>, <code>gemini</code>, <code>deepseek</code>, <code>xai</code>, <code>openrouter</code>, <code>ollama</code>)</td>
+</tr>
+<tr>
+<td><code>VFA_LLM_MODEL</code></td>
+<td><code>gpt-4o</code></td>
+<td>Using non-gpt-4o</td>
+<td>Reasoning model (must support tool calling)</td>
+</tr>
+<tr>
+<td><code>VFA_LLM_API_KEY</code></td>
+<td><em>(empty)</em></td>
+<td>Universal key</td>
+<td>Generic credential overriding provider variable</td>
+</tr>
+<tr>
+<td><code>VFA_LLM_BASE_URL</code></td>
+<td><em>(empty)</em></td>
+<td>Custom gateways</td>
+<td>Base URL override (<code>OPENAI_BASE_URL</code> also honoured)</td>
+</tr>
+<tr>
+<td><code>VFA_VISION_PROVIDER</code></td>
+<td>inherits</td>
+<td>Vision split</td>
+<td>Routing for multimodal calls</td>
+</tr>
+<tr>
+<td><code>VFA_VISION_MODEL</code></td>
+<td>inherits</td>
+<td>Vision split</td>
+<td>Model for screenshots/visual grounding</td>
+</tr>
+<tr>
+<td><code>VFA_VISION_API_KEY</code></td>
+<td>inherits</td>
+<td>Vision split</td>
+<td>Credential for multimodal calls</td>
+</tr>
+<tr>
+<td><code>OLLAMA_API_BASE</code></td>
+<td><em>(empty)</em></td>
+<td>Ollama local</td>
+<td>Local endpoint, e.g. <code>http://localhost:11434</code></td>
+</tr>
+<tr>
+<td><code>VFA_AGENT_MAX_ITERATIONS</code></td>
+<td><code>12</code></td>
+<td>Long flows</td>
+<td>ReAct loop iteration ceiling</td>
+</tr>
+<tr>
+<td><code>VFA_LLM_TEMPERATURE</code></td>
+<td><code>0.0</code></td>
+<td>Never</td>
+<td>Sampling temperature (deterministic QA)</td>
+</tr>
+<tr>
+<td><code>VFA_LLM_TIMEOUT</code></td>
+<td><code>60</code></td>
+<td>Slow models</td>
+<td>Per-call timeout in seconds</td>
+</tr>
+<tr>
+<td><code>VFA_LLM_REQUESTS_PER_SECOND</code></td>
+<td><code>0</code></td>
+<td>Rate limits</td>
+<td>Token-bucket rate limiter; 0 disables</td>
+</tr>
+<tr>
+<td><code>VFA_LLM_CHECKS_PER_SECOND</code></td>
+<td><code>10.0</code></td>
+<td>Never</td>
+<td>Rate limiter polling frequency</td>
+</tr>
+</tbody>
+</table>
+<h3 id="browser-sandbox">Browser &amp; sandbox<a class="headerlink" href="#browser-sandbox" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Default</th>
+<th>Required when</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>HEADLESS</code></td>
+<td><code>true</code></td>
+<td>UI debugging</td>
+<td>Run Chromium without window</td>
+</tr>
+<tr>
+<td><code>VFA_ALLOW_LOCAL_HOST</code></td>
+<td><code>true</code></td>
+<td>Production</td>
+<td>Strict Anti-SSRF blocking when set to false</td>
+</tr>
+<tr>
+<td><code>BROWSER_CDP_URL</code></td>
+<td><em>(empty)</em></td>
+<td>Existing browser</td>
+<td>Optional remote CDP endpoint</td>
+</tr>
+<tr>
+<td><code>BROWSER_CDP_TIMEOUT_MS</code></td>
+<td><code>2000</code></td>
+<td>Slow CDP</td>
+<td>Timeout of CDP connection attempt</td>
+</tr>
+<tr>
+<td><code>VFA_ACTION_TIMEOUT_MS</code></td>
+<td><code>10000</code></td>
+<td>Heavy SPAs</td>
+<td>Individual Playwright action timeout</td>
+</tr>
+<tr>
+<td><code>VFA_SCREENSHOT_FULL_PAGE</code></td>
+<td><code>true</code></td>
+<td>Viewport only</td>
+<td>Full-page screenshots toggle</td>
+</tr>
+<tr>
+<td><code>VFA_SESSION_POOL_ENABLED</code></td>
+<td><code>true</code></td>
+<td>Multi-tenant</td>
+<td>Reuse browser sessions across calls</td>
+</tr>
+<tr>
+<td><code>VFA_SESSION_POOL_TTL</code></td>
+<td><code>300</code></td>
+<td>Never</td>
+<td>Idle seconds before closing session</td>
+</tr>
+<tr>
+<td><code>VFA_SESSION_POOL_MAX_SIZE</code></td>
+<td><code>5</code></td>
+<td>High concurrency</td>
+<td>Max concurrent pooled sessions (LRU)</td>
+</tr>
+<tr>
+<td><code>VFA_SESSION_STORAGE_STATE</code></td>
+<td><em>(empty)</em></td>
+<td>Authenticated flows</td>
+<td>Playwright storageState file path</td>
+</tr>
+<tr>
+<td><code>SSL_VERIFY</code></td>
+<td><code>true</code></td>
+<td>Self-signed certs</td>
+<td>TLS verification switch</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Single source of truth</p>
+<p><code>LITELLM_LOG</code> is passed straight through to LiteLLM. Set it to <code>ERROR</code> in client <code>env</code>
+blocks to keep MCP stderr clean; switch to <code>DEBUG</code> when diagnosing routing problems.</p>
 </div>
 <h2 id="validation-checklist">Validation checklist<a class="headerlink" href="#validation-checklist" title="Permanent link">&para;</a></h2>
 <p>Before opening an issue, confirm the following:</p>

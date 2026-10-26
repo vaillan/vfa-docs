@@ -589,19 +589,18 @@ audit report back.</p>
 </tbody>
 </table>
 <h2 id="architecture-at-a-glance">Architecture at a glance<a class="headerlink" href="#architecture-at-a-glance" title="Permanent link">&para;</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>┌──────────────────┐   stdio (JSON-RPC)   ┌──────────────────────────┐
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>│  MCP Client      │ ◄──────────────────► │  VFA MCP Server          │
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>│  (Cursor, Claude │                      │  ├─ License gate (Creem) │
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>│   Desktop, ...)  │                      │  ├─ Tool router          │
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>└──────────────────┘                      │  ├─ LLM engine (LiteLLM) │
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>                                          │  └─ Browser orchestrator │
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>                                          └───────────┬──────────────┘
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>                                                      │ CDP
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>                                          ┌───────────▼──────────────┐
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>                                          │ Playwright Chromium      │
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>                                          │ (ephemeral contexts)     │
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>                                          └──────────────────────────┘
-</span></code></pre></div>
+<pre class="mermaid"><code>flowchart LR
+    Client(["💻 AI Client&lt;br/&gt;(Cursor / Claude Desktop / Roo Code)"])
+    --&gt;|"MCP Protocol (stdio)"| VFA["🛡️ VFA Server (vfa-mcp)"]
+
+    subgraph VFA_Core ["VFA Hexagonal Engine"]
+        VFA --&gt;|"ReAct &amp; Vision Loop"| LLMAdapter["Universal LiteLLM Adapter"]
+        VFA --&gt;|"Automated Actions"| BrowserAdapter["Playwright Local Sandbox"]
+        BrowserAdapter --&gt;|"Anti-SSRF Firewall"| Guard["Network Guard"]
+    end
+
+    LLMAdapter --&gt;|"Inference"| Providers["☁️ Models: DeepSeek / OpenAI / Claude / Gemini / Ollama"]
+    Guard --&gt;|"Chromium Auditing"| Target["🌐 Target App (Localhost / Staging / Web)"]</code></pre>
 <p>Every invocation spawns a short-lived <code>BrowserContext</code>, performs the audit, drains the
 telemetry buffer and tears the context down. Nothing is persisted between runs unless you
 explicitly enable the session pool.</p>
