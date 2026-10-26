@@ -30,19 +30,19 @@ uvx vfa-mcp
 
 ## Architecture at a glance
 
-```text
-┌──────────────────┐   stdio (JSON-RPC)   ┌──────────────────────────┐
-│  MCP Client      │ ◄──────────────────► │  VFA MCP Server          │
-│  (Cursor, Claude │                      │  ├─ License gate (Creem) │
-│   Desktop, ...)  │                      │  ├─ Tool router          │
-└──────────────────┘                      │  ├─ LLM engine (LiteLLM) │
-                                          │  └─ Browser orchestrator │
-                                          └───────────┬──────────────┘
-                                                      │ CDP
-                                          ┌───────────▼──────────────┐
-                                          │ Playwright Chromium      │
-                                          │ (ephemeral contexts)     │
-                                          └──────────────────────────┘
+```mermaid
+flowchart LR
+    Client(["💻 AI Client<br/>(Cursor / Claude Desktop / Roo Code)"])
+    -->|"MCP Protocol (stdio)"| VFA["🛡️ VFA Server (vfa-mcp)"]
+
+    subgraph VFA_Core ["VFA Hexagonal Engine"]
+        VFA -->|"ReAct & Vision Loop"| LLMAdapter["Universal LiteLLM Adapter"]
+        VFA -->|"Automated Actions"| BrowserAdapter["Playwright Local Sandbox"]
+        BrowserAdapter -->|"Anti-SSRF Firewall"| Guard["Network Guard"]
+    end
+
+    LLMAdapter -->|"Inference"| Providers["☁️ Models: DeepSeek / OpenAI / Claude / Gemini / Ollama"]
+    Guard -->|"Chromium Auditing"| Target["🌐 Target App (Localhost / Staging / Web)"]
 ```
 
 Every invocation spawns a short-lived `BrowserContext`, performs the audit, drains the
