@@ -59,13 +59,23 @@ Every snippet below injects `VFA_LICENSE_KEY` (plus your LLM credentials) into t
 `env` block.
 
 !!! note "Placeholder credentials"
-    Values such as `YOUR_CREEM_LICENSE_KEY` and `YOUR_PROVIDER_API_KEY` are documentation
-    placeholders, not valid credentials. Replace them with your own Creem license and provider
-    key before saving the file.
+    `TU_LICENCIA_CREEM` and `sk-...` are documentation placeholders, not valid credentials.
+    Replace them with your own Creem license and provider key before saving the file — the
+    server exits with `LICENSE_INVALID` if the license key is still the placeholder.
+
+!!! tip "Swapping providers"
+    The block above is the **default OpenAI** configuration (`OPENAI_API_KEY` is honoured
+    directly). To run DeepSeek, Claude, Gemini, OpenRouter or a local Ollama instance, replace
+    only the `"env"` object with the preset of your choice — copy-paste presets for each
+    provider live in [Environment Variables](configuration.md#drop-in-presets).
 
 === "Cursor"
 
-    Create or edit `.cursor/mcp.json` (project-scoped) or `~/.cursor/mcp.json` (global):
+    **Option A — file:** create or edit `.cursor/mcp.json` (project-scoped) or
+    `~/.cursor/mcp.json` (global).
+
+    **Option B — UI:** **Settings → Cursor Settings → Features → MCP → Add new MCP
+    server**, then paste the same block.
 
     ```json
     {
@@ -74,22 +84,24 @@ Every snippet below injects `VFA_LICENSE_KEY` (plus your LLM credentials) into t
           "command": "uvx",
           "args": ["vfa-mcp"],
           "env": {
-            "VFA_LICENSE_KEY": "YOUR_CREEM_LICENSE_KEY",
-            "VFA_LLM_PROVIDER": "deepseek",
-            "VFA_LLM_MODEL": "deepseek-chat",
-            "VFA_LLM_API_KEY": "YOUR_PROVIDER_API_KEY"
+            "VFA_LICENSE_KEY": "TU_LICENCIA_CREEM",
+            "OPENAI_API_KEY": "sk-...",
+            "HEADLESS": "true",
+            "VFA_ALLOW_LOCAL_HOST": "true",
+            "LITELLM_LOG": "ERROR"
           }
         }
       }
     }
     ```
 
-    Reload the window, then confirm `vfa` appears as a connected server under
-    **Settings → MCP**.
+    Reload the window (`Cmd/Ctrl + Shift + P` → **Developer: Reload Window**), then confirm
+    `vfa` appears as a connected server under **Settings → Features → MCP** with its three
+    tools listed.
 
 === "Claude Desktop"
 
-    Edit `claude_desktop_config.json`:
+    Edit `claude_desktop_config.json` (create it if it does not exist):
 
     - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
     - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
@@ -101,22 +113,27 @@ Every snippet below injects `VFA_LICENSE_KEY` (plus your LLM credentials) into t
           "command": "uvx",
           "args": ["vfa-mcp"],
           "env": {
-            "VFA_LICENSE_KEY": "YOUR_CREEM_LICENSE_KEY",
-            "VFA_LLM_PROVIDER": "anthropic",
-            "VFA_LLM_MODEL": "claude-3-5-sonnet-latest",
-            "VFA_LLM_API_KEY": "YOUR_ANTHROPIC_API_KEY"
+            "VFA_LICENSE_KEY": "TU_LICENCIA_CREEM",
+            "OPENAI_API_KEY": "sk-...",
+            "HEADLESS": "true",
+            "VFA_ALLOW_LOCAL_HOST": "true",
+            "LITELLM_LOG": "ERROR"
           }
         }
       }
     }
     ```
 
-    Quit Claude Desktop completely (tray icon → **Quit**) and reopen it. Tools are discovered
-    on startup.
+    Quit Claude Desktop completely (tray icon → **Quit**, not just closing the window) and
+    reopen it. Tools are discovered on startup, so a full restart is mandatory.
 
 === "Roo Code / Cline"
 
-    Edit the extension's `mcpSettings.json` (**MCP Servers → Edit MCP Settings**):
+    Open **MCP Servers → Edit MCP Settings** to edit `mcpSettings.json`:
+
+    - VS Code: `%APPDATA%\Code\User\globalStorage\saoudrizwan.claude-dev\settings\mcp_settings.json`
+      (Windows) or `~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/mcp_settings.json`
+      (macOS)
 
     ```json
     {
@@ -127,18 +144,20 @@ Every snippet below injects `VFA_LICENSE_KEY` (plus your LLM credentials) into t
           "disabled": false,
           "autoApprove": [],
           "env": {
-            "VFA_LICENSE_KEY": "YOUR_CREEM_LICENSE_KEY",
-            "VFA_LLM_PROVIDER": "openrouter",
-            "VFA_LLM_MODEL": "anthropic/claude-3.5-sonnet",
-            "VFA_LLM_API_KEY": "YOUR_OPENROUTER_API_KEY"
+            "VFA_LICENSE_KEY": "TU_LICENCIA_CREEM",
+            "OPENAI_API_KEY": "sk-...",
+            "HEADLESS": "true",
+            "VFA_ALLOW_LOCAL_HOST": "true",
+            "LITELLM_LOG": "ERROR"
           }
         }
       }
     }
     ```
 
-    Roo Code and Cline both read the same settings file format; keep `autoApprove` empty so
-    every audit requires explicit confirmation.
+    Roo Code and Cline both read the same settings format. Keep `autoApprove` empty so every
+    audit requires explicit confirmation, and keep `"disabled": false` or the server will not
+    start.
 
 !!! note "Windows paths"
     On Windows, quote the command if it contains spaces, e.g.
