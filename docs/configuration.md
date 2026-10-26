@@ -55,83 +55,148 @@ vision model.
 
 ## Drop-in presets
 
-Copy the block for your provider into the `env` object of your MCP client configuration, or
-export it in your shell.
+Each preset below is a ready-made `"env"` object. Swap it in for the `"env"` block of the
+server definition described in [MCP Client Wiring](clients.md), or `export` the same names in
+your shell for a standalone run. Every preset carries the runtime flags an MCP host normally
+forgets: `HEADLESS`, `VFA_ALLOW_LOCAL_HOST` and `LITELLM_LOG`.
 
 !!! note "Placeholder credentials"
-    Every key below is a documentation placeholder of the form `YOUR_*_API_KEY` — none of
-    them is a real credential or a valid key format. Substitute your own values and keep them
-    out of version control.
+    Every key below is a documentation placeholder of the form `sk-...` — none of them is a
+    real credential or a valid key format. Substitute your own values and keep them out of
+    version control.
 
-=== "DeepSeek"
+!!! warning "`VFA_LICENSE_KEY` is not part of the presets"
+    These snippets replace **only** the `"env"` object. Keep `"VFA_LICENSE_KEY"` alongside
+    the provider keys — the server refuses to start without a valid Creem license.
 
-    ```bash
-    export VFA_LLM_PROVIDER="deepseek"
-    export VFA_LLM_MODEL="deepseek-chat"
-    export VFA_LLM_API_KEY="YOUR_DEEPSEEK_API_KEY"
-    export VFA_LLM_BASE_URL="https://api.deepseek.com/v1"
-    # DeepSeek is text-only: pair it with a vision model for grounding
-    export VFA_VISION_PROVIDER="gemini"
-    export VFA_VISION_MODEL="gemini-2.0-flash-exp"
-    export VFA_VISION_API_KEY="YOUR_GOOGLE_AI_STUDIO_KEY"
+=== "⚡ DeepSeek"
+
+    ```json
+    "env": {
+      "VFA_LLM_PROVIDER": "deepseek",
+      "VFA_LLM_MODEL": "deepseek-chat",
+      "VFA_VISION_PROVIDER": "deepseek",
+      "VFA_VISION_MODEL": "deepseek-flash",
+      "DEEPSEEK_API_KEY": "sk-...",
+      "HEADLESS": "true",
+      "VFA_ALLOW_LOCAL_HOST": "true",
+      "LITELLM_LOG": "ERROR"
+    }
     ```
 
-    The lowest-cost configuration. Because `deepseek-chat` has no vision support, a vision
-    override is strongly recommended.
+    Lowest cost per audit with an explicit reasoning + vision split. `deepseek-chat` handles
+    planning while `deepseek-flash` keeps screenshot grounding visual. Set
+    `LITELLM_LOG` to `ERROR` so client logs stay readable during long runs.
 
-=== "Claude 3.5 Sonnet"
+=== "🧠 Claude 3.5 Sonnet"
 
-    ```bash
-    export VFA_LLM_PROVIDER="anthropic"
-    export VFA_LLM_MODEL="claude-3-5-sonnet-latest"
-    export VFA_LLM_API_KEY="YOUR_ANTHROPIC_API_KEY"
-    # No vision override needed: the core model is multimodal
+    ```json
+    "env": {
+      "VFA_LLM_PROVIDER": "anthropic",
+      "VFA_LLM_MODEL": "claude-3-5-sonnet-20241022",
+      "ANTHROPIC_API_KEY": "sk-ant-...",
+      "HEADLESS": "true",
+      "VFA_ALLOW_LOCAL_HOST": "true",
+      "LITELLM_LOG": "ERROR"
+    }
     ```
 
-    The reference configuration — best grounding quality for complex flows. One model handles
-    both reasoning and vision, so no override is necessary.
+    The reference configuration. One multimodal model covers both reasoning and vision, so no
+    `VFA_VISION_*` override is needed — best grounding quality on complex flows.
 
-=== "Gemini 2.0 Flash"
+=== "🚀 Gemini 2.0 Flash"
 
-    ```bash
-    export VFA_LLM_PROVIDER="gemini"
-    export VFA_LLM_MODEL="gemini-2.0-flash-exp"
-    export VFA_LLM_API_KEY="YOUR_GOOGLE_AI_STUDIO_KEY"
+    ```json
+    "env": {
+      "VFA_LLM_PROVIDER": "gemini",
+      "VFA_LLM_MODEL": "gemini/gemini-2.0-flash",
+      "GEMINI_API_KEY": "AIzaSy...",
+      "HEADLESS": "true",
+      "VFA_ALLOW_LOCAL_HOST": "true",
+      "LITELLM_LOG": "ERROR"
+    }
     ```
 
-    Fast, cheap and multimodal — a balanced default for high-volume audit runs.
+    Fast, cheap and multimodal — the balanced default for high-volume audit runs.
 
-=== "OpenRouter"
+=== "🌐 OpenRouter"
 
-    ```bash
-    export VFA_LLM_PROVIDER="openrouter"
-    export VFA_LLM_MODEL="anthropic/claude-3.5-sonnet"
-    export VFA_LLM_API_KEY="YOUR_OPENROUTER_API_KEY"
-    export VFA_LLM_BASE_URL="https://openrouter.ai/api/v1"
-    # Route screenshots to a cheaper multimodal model while keeping Sonnet for reasoning
-    export VFA_VISION_PROVIDER="openrouter"
-    export VFA_VISION_MODEL="google/gemini-2.0-flash-exp:free"
+    ```json
+    "env": {
+      "VFA_LLM_PROVIDER": "openrouter",
+      "VFA_LLM_MODEL": "openrouter/anthropic/claude-3.5-sonnet",
+      "VFA_VISION_MODEL": "openrouter/google/gemini-2.0-flash-001",
+      "OPENROUTER_API_KEY": "sk-or-v1-...",
+      "HEADLESS": "true",
+      "VFA_ALLOW_LOCAL_HOST": "true",
+      "LITELLM_LOG": "ERROR"
+    }
     ```
 
-    Any model available on OpenRouter can be selected by changing `VFA_LLM_MODEL` — the
-    provider prefix in the model string follows OpenRouter's own namespace.
+    Universal gateway: any model in OpenRouter's namespace can be selected by changing
+    `VFA_LLM_MODEL`. The preset keeps Sonnet for reasoning and routes screenshots to a cheaper
+    Gemini Flash model.
 
-=== "Local Ollama"
+=== "🏠 Ollama (local / offline)"
 
-    ```bash
-    export VFA_LLM_PROVIDER="ollama"
-    export VFA_LLM_MODEL="llama3.1:70b"
-    export VFA_LLM_BASE_URL="http://localhost:11434"
-    # VFA_LLM_API_KEY is not required for a local daemon
-    export VFA_VISION_PROVIDER="ollama"
-    export VFA_VISION_MODEL="llava:latest"
-    # Chrome does not need to reach a private range, but the model does:
-    # keep the anti-SSRF guard on unless you are auditing local apps
-    export VFA_ALLOW_LOCAL_HOST="false"
+    ```json
+    "env": {
+      "VFA_LLM_PROVIDER": "ollama",
+      "VFA_LLM_MODEL": "ollama/llama3.2-vision",
+      "OLLAMA_API_BASE": "http://localhost:11434",
+      "HEADLESS": "true",
+      "VFA_ALLOW_LOCAL_HOST": "true",
+      "LITELLM_LOG": "ERROR"
+    }
     ```
 
-    Fully offline reasoning. `VFA_LICENSE_KEY` still requires one activation call to Creem;
-    after the license is cached, subsequent runs work without internet access.
+    Fully offline reasoning: no provider key is required. `VFA_LICENSE_KEY` still validates
+    once against Creem; after the license is cached, later runs work without internet access.
+    Keep `VFA_ALLOW_LOCAL_HOST` aligned with what you audit — the model endpoint is local
+    either way, but the guard governs *browser* targets.
+
+=== "⚙️ OpenAI-compatible"
+
+    ```json
+    "env": {
+      "VFA_LLM_PROVIDER": "openai",
+      "VFA_LLM_MODEL": "openai/deepseek-v4-pro",
+      "VFA_VISION_PROVIDER": "openai",
+      "VFA_VISION_MODEL": "openai/deepseek-flash",
+      "OPENAI_API_BASE": "https://api.deepseek.com",
+      "OPENAI_API_KEY": "sk-...",
+      "HEADLESS": "true",
+      "VFA_ALLOW_LOCAL_HOST": "true",
+      "LITELLM_LOG": "ERROR"
+    }
+    ```
+
+    For any gateway that speaks the OpenAI wire format (vLLM, LiteLLM proxy, Together,
+    Fireworks, a self-hosted cluster). Point `OPENAI_API_BASE` at the gateway root and keep the
+    `openai/` prefix inside the model identifiers.
+
+=== "⚙️ Anthropic-compatible"
+
+    ```json
+    "env": {
+      "VFA_LLM_PROVIDER": "anthropic",
+      "VFA_LLM_MODEL": "claude-3-5-sonnet",
+      "ANTHROPIC_BASE_URL": "https://api.deepseek.com/anthropic",
+      "ANTHROPIC_API_KEY": "sk-...",
+      "HEADLESS": "true",
+      "VFA_ALLOW_LOCAL_HOST": "true",
+      "LITELLM_LOG": "ERROR"
+    }
+    ```
+
+    For proxies exposing the Anthropic Messages API. `ANTHROPIC_BASE_URL` replaces the public
+    endpoint while leaving the request shape untouched.
+
+!!! tip "Escaping in JSON"
+    Because `"env"` is a JSON object, never wrap values in single quotes and never add `export`
+    — those are shell syntaxes, valid only in a terminal session.
+
+## Validation checklist
 
 ## Validation checklist
 

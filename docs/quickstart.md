@@ -55,95 +55,13 @@ presets per provider.
 
 ## 4. Wire VFA into your MCP client
 
-Every snippet below injects `VFA_LICENSE_KEY` (plus your LLM credentials) into the server's
-`env` block.
+VFA is launched as `uvx vfa-mcp` over stdio, with `VFA_LICENSE_KEY` and your provider
+credentials declared in the server definition's `"env"` object.
 
-!!! note "Placeholder credentials"
-    Values such as `YOUR_CREEM_LICENSE_KEY` and `YOUR_PROVIDER_API_KEY` are documentation
-    placeholders, not valid credentials. Replace them with your own Creem license and provider
-    key before saving the file.
-
-=== "Cursor"
-
-    Create or edit `.cursor/mcp.json` (project-scoped) or `~/.cursor/mcp.json` (global):
-
-    ```json
-    {
-      "mcpServers": {
-        "vfa": {
-          "command": "uvx",
-          "args": ["vfa-mcp"],
-          "env": {
-            "VFA_LICENSE_KEY": "YOUR_CREEM_LICENSE_KEY",
-            "VFA_LLM_PROVIDER": "deepseek",
-            "VFA_LLM_MODEL": "deepseek-chat",
-            "VFA_LLM_API_KEY": "YOUR_PROVIDER_API_KEY"
-          }
-        }
-      }
-    }
-    ```
-
-    Reload the window, then confirm `vfa` appears as a connected server under
-    **Settings → MCP**.
-
-=== "Claude Desktop"
-
-    Edit `claude_desktop_config.json`:
-
-    - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
-    - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
-
-    ```json
-    {
-      "mcpServers": {
-        "vfa": {
-          "command": "uvx",
-          "args": ["vfa-mcp"],
-          "env": {
-            "VFA_LICENSE_KEY": "YOUR_CREEM_LICENSE_KEY",
-            "VFA_LLM_PROVIDER": "anthropic",
-            "VFA_LLM_MODEL": "claude-3-5-sonnet-latest",
-            "VFA_LLM_API_KEY": "YOUR_ANTHROPIC_API_KEY"
-          }
-        }
-      }
-    }
-    ```
-
-    Quit Claude Desktop completely (tray icon → **Quit**) and reopen it. Tools are discovered
-    on startup.
-
-=== "Roo Code / Cline"
-
-    Edit the extension's `mcpSettings.json` (**MCP Servers → Edit MCP Settings**):
-
-    ```json
-    {
-      "mcpServers": {
-        "vfa": {
-          "command": "uvx",
-          "args": ["vfa-mcp"],
-          "disabled": false,
-          "autoApprove": [],
-          "env": {
-            "VFA_LICENSE_KEY": "YOUR_CREEM_LICENSE_KEY",
-            "VFA_LLM_PROVIDER": "openrouter",
-            "VFA_LLM_MODEL": "anthropic/claude-3.5-sonnet",
-            "VFA_LLM_API_KEY": "YOUR_OPENROUTER_API_KEY"
-          }
-        }
-      }
-    }
-    ```
-
-    Roo Code and Cline both read the same settings file format; keep `autoApprove` empty so
-    every audit requires explicit confirmation.
-
-!!! note "Windows paths"
-    On Windows, quote the command if it contains spaces, e.g.
-    `"command": "C:\\Users\\you\\.local\\bin\\uvx.exe"`. Run `where uvx` to find the exact
-    path.
+- **[MCP Client Wiring](clients.md)** — copy-paste configs for Zoo Code / Roo Code, Claude
+  Desktop and Cursor, plus troubleshooting.
+- **[Environment Variables](configuration.md#drop-in-presets)** — the `"env"` object to paste
+  for each LLM provider.
 
 ## 5. Verify the installation
 
@@ -173,5 +91,6 @@ The process speaks JSON-RPC over stdio, exactly like the client-managed launch �
 
 ## Next steps
 
+- [MCP Client Wiring](clients.md) — client configs, presets and troubleshooting.
 - [Environment Variables](configuration.md) — every knob, plus provider presets.
 - [MCP Tools](tools.md) — parameter contracts and output schemas.

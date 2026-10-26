@@ -25,10 +25,10 @@ mkdocs build --strict
 | Path | Purpose |
 | --- | --- |
 | `mkdocs.yml` | Site configuration: theme, palette, extensions and navigation. |
-| `docs/index.md` | Project overview, pillars and security model. |
-| `docs/quickstart.md` | License activation, MCP client configs, standalone CLI. |
-| `docs/configuration.md` | Environment variable reference and provider presets. |
-| `docs/tools.md` | MCP tool contracts, behavior and output schemas. |
+| `docs/index.md` | Project overview, hexagonal architecture diagram (Mermaid) and security model. |
+| `docs/quickstart.md` | License activation, first run and verification. |
+| `docs/clients.md` | MCP client wiring: Zoo/Roo Code, Claude Desktop, Cursor, troubleshooting. |
+| `docs/configuration.md` | Environment variable reference and per-provider `env` presets. |
 | `.github/workflows/deploy.yml` | CI: build on every push to `main` and publish via `mkdocs gh-deploy --force`. |
 
 ## Deployment
