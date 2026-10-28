@@ -1,24 +1,60 @@
 # Quickstart & License
 
+!!! tip "Recommended: Zero-Install with `uvx`"
+    You do **not** need to install `vfa-mcp` via `pip`. Using `uvx` allows your MCP client to fetch and run the latest version from PyPI in an isolated sandbox, avoiding global Python dependency conflicts and Windows `PATH` issues.
+
 Get VFA running inside your MCP client in under five minutes.
 
 ## 1. Prerequisites
 
-| Requirement | Notes |
-| --- | --- |
-| Python 3.10+ | Only needed for the `pip` install path. `uvx` manages its own runtime. |
-| `uv` / `uvx` | Recommended launcher. Install with `curl -LsSf https://astral.sh/uv/install.sh \| sh`. |
-| Playwright Chromium | VFA drives a **local** browser. Install the binary once with the command below. |
-| LLM API key | Any provider supported by LiteLLM (DeepSeek, Anthropic, Google, OpenRouter, Ollama…). |
-| Creem license | A single-seat `VFA_LICENSE_KEY` — required, the server refuses to start without it. |
+VFA requires **`uvx`** (to run in an isolated environment without installation) and **Chromium** (for local browser automation). Select your operating system below:
 
-```bash
-# Install the Chromium build Playwright needs (run once per machine)
-playwright install chromium
-```
+=== "Windows"
 
-If `playwright` is not on your `PATH`, use `python -m playwright install chromium`, or let
-`uvx` do it: `uvx --from playwright playwright install chromium`.
+    **1. Install `uv` (includes `uvx`):**
+    Open PowerShell and run:
+    ```powershell
+    powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+    ```
+
+    *If PowerShell does not recognize `uvx` after installation, add it to your PATH:*
+    ```powershell
+    [Environment]::SetEnvironmentVariable("Path", [Environment]::GetEnvironmentVariable("Path", "User") + ";$env:USERPROFILE\.local\bin", "User")
+    ```
+
+    **2. Install Chromium (run once):**
+    ```powershell
+    uvx playwright install chromium
+    ```
+
+=== "macOS"
+
+    **1. Install `uv`:**
+    ```bash
+    brew install uv
+    # Or via curl:
+    # curl -LsSf https://astral.sh/uv/install.sh | sh
+    ```
+
+    **2. Install Chromium (run once):**
+    ```bash
+    uvx playwright install chromium
+    ```
+
+=== "Linux (Ubuntu / Debian / Arch)"
+
+    **1. Install `uv`:**
+    ```bash
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    ```
+
+    **2. Install Chromium with system dependencies (run once):**
+    ```bash
+    uvx playwright install --with-deps chromium
+    ```
+
+!!! tip "Zero-Docker Architecture"
+    VFA drives Chromium natively on your host with an ephemeral memory sandbox and Anti-SSRF protection. You do **not** need Docker, containers, or remote browsers.
 
 ## 2. Activate your license
 
@@ -127,7 +163,7 @@ Every snippet below injects `VFA_LICENSE_KEY` (plus your LLM credentials) into t
     Quit Claude Desktop completely (tray icon → **Quit**, not just closing the window) and
     reopen it. Tools are discovered on startup, so a full restart is mandatory.
 
-=== "Roo Code / Cline"
+=== "Zoo Code / Cline"
 
     Open **MCP Servers → Edit MCP Settings** to edit `mcpSettings.json`:
 
@@ -174,18 +210,19 @@ A healthy response returns a JSON report containing `status`, `findings`, `scree
 metrics. If the server fails to appear, check the client's MCP log output — the usual causes
 are a missing `VFA_LICENSE_KEY`, an expired key, or Chromium not being installed.
 
-## Standalone CLI execution
+## Standalone CLI execution (Testing without an MCP client)
 
-VFA is also runnable without any client integration, which is handy for CI pipelines or
-debugging:
+If you want to test VFA directly from your terminal or CI/CD without configuring an IDE:
 
 ```bash
-pip install vfa-mcp
-playwright install chromium
-export VFA_LICENSE_KEY="YOUR_CREEM_LICENSE_KEY"
+# 1. Ensure Chromium is installed once
+uvx playwright install chromium
 
-vfa-mcp --help
+# 2. Run directly from PyPI (no pip install or PATH setup required)
+uvx vfa-mcp --help
 ```
+!!! warning "Why avoid `pip install`?"
+    Installing via `pip install vfa-mcp` places the executable in your Python `Scripts` directory. On Windows and macOS, if this folder is not in your system `$PATH`, your terminal will fail with `command not found: vfa-mcp`. Running via `uvx` eliminates this problem entirely.
 
 The process speaks JSON-RPC over stdio, exactly like the client-managed launch — pipe a
 `tools/call` request into it and read the response from stdout.
