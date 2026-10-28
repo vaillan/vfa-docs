@@ -406,10 +406,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#standalone-cli-execution" class="md-nav__link">
+  <a href="#standalone-cli-execution-testing-without-an-mcp-client" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Standalone CLI execution
+        Standalone CLI execution (Testing without an MCP client)
       
     </span>
   </a>
@@ -571,10 +571,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#standalone-cli-execution" class="md-nav__link">
+  <a href="#standalone-cli-execution-testing-without-an-mcp-client" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Standalone CLI execution
+        Standalone CLI execution (Testing without an MCP client)
       
     </span>
   </a>
@@ -613,48 +613,56 @@
 
 
 <h1 id="quickstart-license">Quickstart &amp; License<a class="headerlink" href="#quickstart-license" title="Permanent link">&para;</a></h1>
+<div class="admonition tip">
+<p class="admonition-title">Recommended: Zero-Install with <code>uvx</code></p>
+<p>You do <strong>not</strong> need to install <code>vfa-mcp</code> via <code>pip</code>. Using <code>uvx</code> allows your MCP client to fetch and run the latest version from PyPI in an isolated sandbox, avoiding global Python dependency conflicts and Windows <code>PATH</code> issues.</p>
+</div>
 <p>Get VFA running inside your MCP client in under five minutes.</p>
 <h2 id="1-prerequisites">1. Prerequisites<a class="headerlink" href="#1-prerequisites" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Requirement</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Python 3.10+</td>
-<td>Only needed for the <code>pip</code> install path. <code>uvx</code> manages its own runtime.</td>
-</tr>
-<tr>
-<td><code>uv</code> / <code>uvx</code></td>
-<td>Recommended launcher. Install with <code>curl -LsSf https://astral.sh/uv/install.sh \| sh</code>.</td>
-</tr>
-<tr>
-<td>Playwright Chromium</td>
-<td>VFA drives a <strong>local</strong> browser. Install the binary once with the command below.</td>
-</tr>
-<tr>
-<td>LLM API key</td>
-<td>Any provider supported by LiteLLM (DeepSeek, Anthropic, Google, OpenRouter, Ollama…).</td>
-</tr>
-<tr>
-<td>Creem license</td>
-<td>A single-seat <code>VFA_LICENSE_KEY</code> — required, the server refuses to start without it.</td>
-</tr>
-</tbody>
-</table>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Install the Chromium build Playwright needs (run once per machine)</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>playwright<span class="w"> </span>install<span class="w"> </span>chromium
-</span></code></pre></div>
-<p>If <code>playwright</code> is not on your <code>PATH</code>, use <code>python -m playwright install chromium</code>, or let
-<code>uvx</code> do it: <code>uvx --from playwright playwright install chromium</code>.</p>
+<p>VFA requires <strong><code>uvx</code></strong> (to run in an isolated environment without installation) and <strong>Chromium</strong> (for local browser automation). Select your operating system below:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Windows</label><label for="__tabbed_1_2">macOS</label><label for="__tabbed_1_3">Linux (Ubuntu / Debian / Arch)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><strong>1. Install <code>uv</code> (includes <code>uvx</code>):</strong>
+Open PowerShell and run:
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">powershell</span> <span class="n">-ExecutionPolicy</span> <span class="n">ByPass</span> <span class="n">-c</span> <span class="s2">"irm https://astral.sh/uv/install.ps1 | iex"</span>
+</span></code></pre></div></p>
+<p><em>If PowerShell does not recognize <code>uvx</code> after installation, add it to your PATH:</em>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="no">[Environment]</span><span class="p">::</span><span class="n">SetEnvironmentVariable</span><span class="p">(</span><span class="s2">"Path"</span><span class="p">,</span> <span class="no">[Environment]</span><span class="p">::</span><span class="n">GetEnvironmentVariable</span><span class="p">(</span><span class="s2">"Path"</span><span class="p">,</span> <span class="s2">"User"</span><span class="p">)</span> <span class="p">+</span> <span class="s2">";$env:USERPROFILE\.local\bin"</span><span class="p">,</span> <span class="s2">"User"</span><span class="p">)</span>
+</span></code></pre></div></p>
+<p><strong>2. Install Chromium (run once):</strong>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">uvx</span> <span class="n">playwright</span> <span class="n">install</span> <span class="n">chromium</span>
+</span></code></pre></div></p>
+</div>
+<div class="tabbed-block">
+<p><strong>1. Install <code>uv</code>:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>brew<span class="w"> </span>install<span class="w"> </span>uv
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># Or via curl:</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># curl -LsSf https://astral.sh/uv/install.sh | sh</span>
+</span></code></pre></div></p>
+<p><strong>2. Install Chromium (run once):</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>uvx<span class="w"> </span>playwright<span class="w"> </span>install<span class="w"> </span>chromium
+</span></code></pre></div></p>
+</div>
+<div class="tabbed-block">
+<p><strong>1. Install <code>uv</code>:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>curl<span class="w"> </span>-LsSf<span class="w"> </span>https://astral.sh/uv/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+</span></code></pre></div></p>
+<p><strong>2. Install Chromium with system dependencies (run once):</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>uvx<span class="w"> </span>playwright<span class="w"> </span>install<span class="w"> </span>--with-deps<span class="w"> </span>chromium
+</span></code></pre></div></p>
+</div>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Zero-Docker Architecture</p>
+<p>VFA drives Chromium natively on your host with an ephemeral memory sandbox and Anti-SSRF protection. You do <strong>not</strong> need Docker, containers, or remote browsers.</p>
+</div>
 <h2 id="2-activate-your-license">2. Activate your license<a class="headerlink" href="#2-activate-your-license" title="Permanent link">&para;</a></h2>
 <p>VFA is sold and licensed through <strong>Creem</strong>. After purchase, your Creem receipt contains a
 license key in the <code>VFA-</code> prefixed format; copy it from the customer portal. The key is
 validated at server startup and refreshed periodically during the session.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LICENSE_KEY</span><span class="o">=</span><span class="s2">"YOUR_CREEM_LICENSE_KEY"</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LICENSE_KEY</span><span class="o">=</span><span class="s2">"YOUR_CREEM_LICENSE_KEY"</span>
 </span></code></pre></div>
 <div class="admonition danger">
 <p class="admonition-title">Single-seat license</p>
@@ -670,9 +678,9 @@ your MCP client configuration — never in a tracked file.</p>
 </div>
 <h2 id="3-configure-your-llm-provider">3. Configure your LLM provider<a class="headerlink" href="#3-configure-your-llm-provider" title="Permanent link">&para;</a></h2>
 <p>At minimum, set a provider, a model and an API key:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LLM_PROVIDER</span><span class="o">=</span><span class="s2">"deepseek"</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LLM_MODEL</span><span class="o">=</span><span class="s2">"deepseek-chat"</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LLM_API_KEY</span><span class="o">=</span><span class="s2">"YOUR_PROVIDER_API_KEY"</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LLM_PROVIDER</span><span class="o">=</span><span class="s2">"deepseek"</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LLM_MODEL</span><span class="o">=</span><span class="s2">"deepseek-chat"</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LLM_API_KEY</span><span class="o">=</span><span class="s2">"YOUR_PROVIDER_API_KEY"</span>
 </span></code></pre></div>
 <p>Check <a href="../configuration/">Environment Variables</a> for the complete reference and copy-paste
 presets per provider.</p>
@@ -692,28 +700,28 @@ directly). To run DeepSeek, Claude, Gemini, OpenRouter or a local Ollama instanc
 only the <code>"env"</code> object with the preset of your choice — copy-paste presets for each
 provider live in <a href="../configuration/#drop-in-presets">Environment Variables</a>.</p>
 </div>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Cursor</label><label for="__tabbed_1_2">Claude Desktop</label><label for="__tabbed_1_3">Roo Code / Cline</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Cursor</label><label for="__tabbed_2_2">Claude Desktop</label><label for="__tabbed_2_3">Zoo Code / Cline</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p><strong>Option A — file:</strong> create or edit <code>.cursor/mcp.json</code> (project-scoped) or
 <code>~/.cursor/mcp.json</code> (global).</p>
 <p><strong>Option B — UI:</strong> <strong>Settings → Cursor Settings → Features → MCP → Add new MCP
 server</strong>, then paste the same block.</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">"mcpServers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">"vfa"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">      </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uvx"</span><span class="p">,</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">      </span><span class="nt">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"vfa-mcp"</span><span class="p">],</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">      </span><span class="nt">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">        </span><span class="nt">"VFA_LICENSE_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TU_LICENCIA_CREEM"</span><span class="p">,</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">        </span><span class="nt">"OPENAI_API_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sk-..."</span><span class="p">,</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">        </span><span class="nt">"HEADLESS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">        </span><span class="nt">"VFA_ALLOW_LOCAL_HOST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="nt">"LITELLM_LOG"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ERROR"</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">      </span><span class="p">}</span>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">  </span><span class="p">}</span>
-</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="p">}</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">{</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">"mcpServers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nt">"vfa"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">      </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uvx"</span><span class="p">,</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">      </span><span class="nt">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"vfa-mcp"</span><span class="p">],</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">      </span><span class="nt">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">        </span><span class="nt">"VFA_LICENSE_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TU_LICENCIA_CREEM"</span><span class="p">,</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">        </span><span class="nt">"OPENAI_API_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sk-..."</span><span class="p">,</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">        </span><span class="nt">"HEADLESS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">        </span><span class="nt">"VFA_ALLOW_LOCAL_HOST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">        </span><span class="nt">"LITELLM_LOG"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ERROR"</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">      </span><span class="p">}</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="p">}</span>
 </span></code></pre></div>
 <p>Reload the window (<code>Cmd/Ctrl + Shift + P</code> → <strong>Developer: Reload Window</strong>), then confirm
 <code>vfa</code> appears as a connected server under <strong>Settings → Features → MCP</strong> with its three
@@ -725,21 +733,21 @@ tools listed.</p>
 <li>macOS: <code>~/Library/Application Support/Claude/claude_desktop_config.json</code></li>
 <li>Windows: <code>%APPDATA%\Claude\claude_desktop_config.json</code></li>
 </ul>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">"mcpServers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">"vfa"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">      </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uvx"</span><span class="p">,</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">      </span><span class="nt">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"vfa-mcp"</span><span class="p">],</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">      </span><span class="nt">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">        </span><span class="nt">"VFA_LICENSE_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TU_LICENCIA_CREEM"</span><span class="p">,</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">        </span><span class="nt">"OPENAI_API_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sk-..."</span><span class="p">,</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">        </span><span class="nt">"HEADLESS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">        </span><span class="nt">"VFA_ALLOW_LOCAL_HOST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">        </span><span class="nt">"LITELLM_LOG"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ERROR"</span>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">      </span><span class="p">}</span>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">  </span><span class="p">}</span>
-</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="p">}</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">{</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">"mcpServers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nt">"vfa"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">      </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uvx"</span><span class="p">,</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">      </span><span class="nt">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"vfa-mcp"</span><span class="p">],</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">      </span><span class="nt">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">        </span><span class="nt">"VFA_LICENSE_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TU_LICENCIA_CREEM"</span><span class="p">,</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">        </span><span class="nt">"OPENAI_API_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sk-..."</span><span class="p">,</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">        </span><span class="nt">"HEADLESS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">        </span><span class="nt">"VFA_ALLOW_LOCAL_HOST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">        </span><span class="nt">"LITELLM_LOG"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ERROR"</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">      </span><span class="p">}</span>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="p">}</span>
 </span></code></pre></div>
 <p>Quit Claude Desktop completely (tray icon → <strong>Quit</strong>, not just closing the window) and
 reopen it. Tools are discovered on startup, so a full restart is mandatory.</p>
@@ -751,23 +759,23 @@ reopen it. Tools are discovered on startup, so a full restart is mandatory.</p>
   (Windows) or <code>~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/mcp_settings.json</code>
   (macOS)</li>
 </ul>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">"mcpServers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">"vfa"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">      </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uvx"</span><span class="p">,</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">      </span><span class="nt">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"vfa-mcp"</span><span class="p">],</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">      </span><span class="nt">"disabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">      </span><span class="nt">"autoApprove"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">      </span><span class="nt">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">        </span><span class="nt">"VFA_LICENSE_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TU_LICENCIA_CREEM"</span><span class="p">,</span>
-</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">        </span><span class="nt">"OPENAI_API_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sk-..."</span><span class="p">,</span>
-</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">        </span><span class="nt">"HEADLESS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
-</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">        </span><span class="nt">"VFA_ALLOW_LOCAL_HOST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
-</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">        </span><span class="nt">"LITELLM_LOG"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ERROR"</span>
-</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">      </span><span class="p">}</span>
-</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">  </span><span class="p">}</span>
-</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="p">}</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">{</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">"mcpServers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="nt">"vfa"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">      </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uvx"</span><span class="p">,</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">      </span><span class="nt">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"vfa-mcp"</span><span class="p">],</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">      </span><span class="nt">"disabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">      </span><span class="nt">"autoApprove"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">      </span><span class="nt">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">        </span><span class="nt">"VFA_LICENSE_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TU_LICENCIA_CREEM"</span><span class="p">,</span>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">        </span><span class="nt">"OPENAI_API_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sk-..."</span><span class="p">,</span>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">        </span><span class="nt">"HEADLESS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="w">        </span><span class="nt">"VFA_ALLOW_LOCAL_HOST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="w">        </span><span class="nt">"LITELLM_LOG"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ERROR"</span>
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="w">      </span><span class="p">}</span>
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="p">}</span>
 </span></code></pre></div>
 <p>Roo Code and Cline both read the same settings format. Keep <code>autoApprove</code> empty so every
 audit requires explicit confirmation, and keep <code>"disabled": false</code> or the server will not
@@ -789,15 +797,18 @@ path.</p>
 <p>A healthy response returns a JSON report containing <code>status</code>, <code>findings</code>, <code>screenshots</code> and
 metrics. If the server fails to appear, check the client's MCP log output — the usual causes
 are a missing <code>VFA_LICENSE_KEY</code>, an expired key, or Chromium not being installed.</p>
-<h2 id="standalone-cli-execution">Standalone CLI execution<a class="headerlink" href="#standalone-cli-execution" title="Permanent link">&para;</a></h2>
-<p>VFA is also runnable without any client integration, which is handy for CI pipelines or
-debugging:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>pip<span class="w"> </span>install<span class="w"> </span>vfa-mcp
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>playwright<span class="w"> </span>install<span class="w"> </span>chromium
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VFA_LICENSE_KEY</span><span class="o">=</span><span class="s2">"YOUR_CREEM_LICENSE_KEY"</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>vfa-mcp<span class="w"> </span>--help
+<h2 id="standalone-cli-execution-testing-without-an-mcp-client">Standalone CLI execution (Testing without an MCP client)<a class="headerlink" href="#standalone-cli-execution-testing-without-an-mcp-client" title="Permanent link">&para;</a></h2>
+<p>If you want to test VFA directly from your terminal or CI/CD without configuring an IDE:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># 1. Ensure Chromium is installed once</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>uvx<span class="w"> </span>playwright<span class="w"> </span>install<span class="w"> </span>chromium
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1"># 2. Run directly from PyPI (no pip install or PATH setup required)</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>uvx<span class="w"> </span>vfa-mcp<span class="w"> </span>--help
 </span></code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Why avoid <code>pip install</code>?</p>
+<p>Installing via <code>pip install vfa-mcp</code> places the executable in your Python <code>Scripts</code> directory. On Windows and macOS, if this folder is not in your system <code>$PATH</code>, your terminal will fail with <code>command not found: vfa-mcp</code>. Running via <code>uvx</code> eliminates this problem entirely.</p>
+</div>
 <p>The process speaks JSON-RPC over stdio, exactly like the client-managed launch — pipe a
 <code>tools/call</code> request into it and read the response from stdout.</p>
 <h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
